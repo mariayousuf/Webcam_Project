@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PhotoCaptureModelStoreContainer" CdmEntityContainer="PhotoCaptureEntities">
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="PhotoCaptureModel.Image">
+        <MappingFragment StoreEntitySet="Image">
+          <ScalarProperty Name="imagepath" ColumnName="imagepath" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ImageBase64String" ColumnName="ImageBase64String" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

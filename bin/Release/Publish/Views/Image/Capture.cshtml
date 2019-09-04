@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Capture";
+}
+
+<h2>Capture</h2>
+@*<script src="~/Scripts/jquery.webcam.min.js"></script>
+    <script src="~/Scripts/jquery.webcam.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+@*<script type="text/javascript" src="webcam.js"></script>*@
+<div class="col-md-2"></div>
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">Camera</div>
+        <div class="panel-body">
+            <div id="my_camera"></div>
+            <!-- A button for taking snaps -->
+            <form>
+                <input type="button" class="btn btn-success" value="Take Snapshot" onClick="take_snapshot()">
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="~/webcamjs/webcam.js"></script>
+<div class="col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">Captured Photo</div>
+        <div class="panel-body">
+            <div id="results">Your captured image will appear here...</div>
+        </div>
+        <br />
+        <br />
+    </div>
+</div>
+<script language="JavaScript">
+    Webcam.set({
+        width: 320,
+        height: 240,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+    Webcam.attach('#my_camera');
+</script>
+<!-- Code to handle taking the snapshot and displaying it locally -->
+
+<script language="JavaScript">
+
+
+    //function take_snapshot() {
+    //    // take snapshot and get image data
+    //    Webcam.snap(function (data_uri) {
+    //        // display results in page
+    //        document.getElementById('results').innerHTML =
+    //            '<img src="' +
+    //            data_uri +
+    //            '"/>';
+
+    //        Webcam.upload(data_uri,
+    //            '/Image/Capture',
+    //            function (code, text) {
+    //                alert('Photo Captured');
+    //            });
+    //        alert(document.getElementById('results').innerHTML =
+    //            '<img src="' +
+    //            data_uri +
+    //            '"/>');
+    //    });
+    //}
+</script>
+<script>
+    var snap;
+    var imageCap = "";
+    function take_snapshot() {
+       
+        var img = new Object();
+        img.cap = $('#txtName').val();
+        Webcam.snap(function (data_uri) {
+            // display results in page
+            document.getElementById('results').innerHTML =
+                '<img src="' +
+                data_uri +
+                '"/>';
+            imageCap = data_uri;
+
+            alert(document.getElementById('results').innerHTML =
+                '<img src="' +
+                data_uri +
+                '"/>');
+            snap = document.getElementById('results').innerHTML =
+                '<img src="' +
+                data_uri +
+                '"/>';
+            alert(snap);
+        });
+
+        var obj={
+            name: imageCap
+        }
+        $.ajax({
+            
+            type: "POST",
+            url: '/Image/capture_image',
+           
+            data: JSON.stringify(obj),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+
+            success: function (data) {
+            }
+        });
+    }     
+                // take snapshot and get image data
+            //    Webcam.snap(function (data_uri) {
+            //        // display results in page
+            //        document.getElementById('results').innerHTML =
+            //            '<img src="' +
+            //            data_uri +
+            //            '"/>';
+
+            //        Webcam.upload(data_uri,
+            //            '/Image/capture_image',
+            //            function (code, text) {
+            //                data.cap = snap;
+            //                alert(img.cap);
+            //                alert('Photo Captured');
+            //            });
+                  
+            //        alert(document.getElementById('results').innerHTML =
+            //            '<img src="' +
+            //            data_uri +
+            //            '"/>');
+            //        snap = document.getElementById('results').innerHTML =
+            //            '<img src="' +
+            //            data_uri +
+            //            '"/>';
+            //        alert(snap);
+
+                  
+            //        alert(snap);
+
+
+            //    });
+
+            //}
+
+            //$.ajax({
+
+            //    type: "POST",
+            //    url: '/Image/capture_image',
+            //    //data: '{PersonID: "' + PersonID + '" }',
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "html",
+
+            //    success: function (response) {
+            //        response.image = snap;
+
+            //        alert(snap);
+
+      
+
+    
+    
+
+
+</script>
